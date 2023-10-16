@@ -1,15 +1,20 @@
 package hoiMod
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Engine struct {
+	// Real Data
 	name string
+
+	// Game Data
 	/* Misc Abilities */
-	speed_modifier float32
+	speed_modifier float32 // modifier for speed use for set the starting speed
+	fuel_modifier  float32
 
-	speed_multiplier float32
+	speed_multiplier float32 // multiplier for speed
 
-	fuel_consuming float32
 	/* Defensive Abilities */
 	/* Offensive Abilities */
 	/* Space taken in convoy */
@@ -34,33 +39,37 @@ func NewEngineF(
 	this.name = pName
 	this.speed_modifier = pSpeedModifier
 	this.speed_multiplier = pSpeedMultiplier
-	this.fuel_consuming = pFuelConsuming
+	this.fuel_modifier = pFuelConsuming
 	return &this
 }
 
 /*
 Setter
 */
-func (this Engine) SetName(pName string) { // set the name of the engine
-	this.name = pName
+func (e *Engine) SetName(name string) { // set the name of the engine
+	e.name = name
 }
 
 /*
 Getter
 */
-func (this Engine) GetName() string { // get the name of the engine
-	if this.name == "" {
+func (e *Engine) GetName() string { // get the name of the engine
+	if e.name == "" {
 		return "N/A"
 	}
-	return this.name
+	return e.name
+}
+
+func (e *Engine) GetGameValues() {
+
 }
 
 /*
 Print
 */
-func (this Engine) Print() { // Print the engine
+func (e *Engine) Print() { // Print the engine
 	var text string
 	// Create the text string
-	text += "Name : " + this.name + "\n"
+	text += "Name : " + e.name + "\n"
 	fmt.Println(text)
 }

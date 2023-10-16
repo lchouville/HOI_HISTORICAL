@@ -7,10 +7,12 @@ import (
 
 func main() {
 	engine := e.NewEngineE("Moteur v12 Daimler-Benz MB509")
-	tank := s.NewTankF("Maus", *engine)
+	tank := s.NewTankF("Maus", "GERMAN", *engine)
 	tank.Print()
 
-	tank2 := s.NewTankE("Panther")
+	tank2 := s.NewTankE("Panther", "GERMAN")
+	tank2.Print()
+	tank2.SetName("Panzer V")
 	tank2.Print()
 	// tank.GetEngine().Print()
 }
