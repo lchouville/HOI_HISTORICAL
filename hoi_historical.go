@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	s "hoiMod/assets/structs"
-	e "hoiMod/assets/structs/elements"
+	s "hoiMod/bin/structs"
+	e "hoiMod/bin/structs/elements"
 )
 
 func main() {
