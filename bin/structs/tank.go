@@ -4,6 +4,7 @@ import (
 	"fmt"
 	d "hoiMod/bin/structs/display"
 	e "hoiMod/bin/structs/elements"
+	s "hoiMod/bin/structs/systems"
 )
 
 type tank struct {
@@ -34,7 +35,7 @@ type tank struct {
 	/* Space taken in convoy */
 	lend_lease_cost float32
 	// number of factories needed to build
-	resources []e.Resource // resources needed to build
+	resources []s.Resource // resources needed to build
 
 }
 

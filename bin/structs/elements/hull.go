@@ -15,7 +15,7 @@ type Hull struct {
 	// resources []s.Resource // resources needed to build
 }
 
-// Builder
+/** Builder **/
 func NewHullE(name string) *Hull {
 	var this Hull
 	this.name = name
