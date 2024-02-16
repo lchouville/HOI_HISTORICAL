@@ -4,7 +4,8 @@ import (
 	s "hoiMod/bin/structs/systems"
 )
 
-/** Material Object **/
+/** Material Object -------------------------- **/
+
 type Material struct {
 	// Input Value
 	name string
@@ -13,7 +14,9 @@ type Material struct {
 	addStats s.Stats //Stat Additioned at Equipement stats
 	mulStats s.Stats //Stat Multiplied at Equipement stats
 }
-/** Builder **/
+
+
+/** Builder --------------------------------- **/
 
 func NewMaterial(_name string, _mohs float32)*Material{
 	// create material with data gived on parameters
@@ -25,7 +28,10 @@ func NewMaterial(_name string, _mohs float32)*Material{
 	material.calculation()
 	return material
 }
-/** Accessor **/
+
+
+/** Accessors ------------------------------ **/
+
 // Get the name of the material
 func (material *Material) GetName() string{
 	return material.name
@@ -51,7 +57,9 @@ func (material *Material) GetMulStats() s.Stats {
 	return material.mulStats 
 }
 
-/** Methode **/
+
+/** Method -------------------------------- **/
+
 // Calculate The effect of the material on stats
 func (material *Material) calculation() {
 	var armor_thinkness_M float32 //Store the multiplier Armor Stat

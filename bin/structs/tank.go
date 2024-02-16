@@ -7,6 +7,8 @@ import (
 	s "hoiMod/bin/structs/systems"
 )
 
+/** Tank Object ------------------------------ **/
+
 type tank struct {
 	// Real data
 	name    string
@@ -16,81 +18,76 @@ type tank struct {
 	engine          e.Engine
 	armor_thinkness int // the armor thickness applied to the Hull
 
-	// Game data
-	/* Misc Abilities */
-	maximum_speed  float32 // modifier for downgrade the speed with the default mass of the hull
-	reliability    float32
-	fuel_consuming float32
-	build_cost_ic  float32
-	/* Defensive Abilities */
-	defense      float32
-	breakthrough float32
-	hardness     float32
-	armor_value  float32
-	/* Offensive Abilities */
-	soft_attack float32
-	hard_attack float32
-	ap_attack   float32
-	air_attack  float32
-	/* Space taken in convoy */
-	lend_lease_cost float32
-	// number of factories needed to build
-	resources []s.Resource // resources needed to build
+	
+	// Output Value
+	stats s.Stats // Final stats of the tank
 
 }
 
-// Builder
+
+/** Builder --------------------------------- **/
+
 func NewTankE(
-	name string,
-	faction string,
+	_name string,
+	_faction string,
 ) *tank {
 	var this tank
-	this.name = name
-	this.faction = faction
+	this.name = _name
+	this.faction = _faction
 	return &this
 }
 func NewTankF(
-	name string,
-	faction string,
-	engine e.Engine,
+	_name string,
+	_faction string,
+	_engine e.Engine,
 ) *tank {
-	var this tank = *NewTankE(name, faction)
-	this.engine = engine
+	var this tank = *NewTankE(_name, _faction)
+	this.engine = _engine
 	return &this
 }
 
-// Setter
-func (t *tank) SetName(name string) {
-	t.name = name
+
+/** Accessors ------------------------------ **/
+
+func (tan *tank) SetName(_name string) {
+	tan.name = _name
 }
-func (t *tank) SetEngine(engine e.Engine) {
-	t.engine = engine
+func (tan *tank) SetEngine(_engine e.Engine) {
+	tan.engine = _engine
 }
 
-// Getter
-func (t *tank) GetName() string {
-	if t.name == "" {
+func (tan *tank) GetName() string {
+	if tan.name == "" {
 		return "N/A"
 	}
-	return t.name
+	return tan.name
 }
-func (t *tank) GetEngine() e.Engine {
-	return t.engine
+func (tan *tank) GetEngine() e.Engine {
+	return tan.engine
 }
 
-// Print
-func (t *tank) Print() {
+// Get the Game statistics of the tank
+func (tan *tank) GetStats() s.Stats { 
+	return tan.stats 
+}
+
+/** Method -------------------------------- **/
+func (tan *tank) calculation(){
+	tan.stats.AddStats(tan.engine.GetAddStats())
+	tan.stats.MulStats(tan.engine.GetAddStats())
+}
+func (tan *tank) Print() {
 	var text string
 	colorE := string(d.Color_Cyan)
 	resetAll := string(d.ResetAll)
 	// Create the text string
 	text += (string(d.Text_Bold) +
 		string(d.Color_Magenta) +
-		t.name +
+		tan.name +
 		resetAll +
 		"\n")
 	// Engine
 	text += (colorE + "↪ Engine : " + resetAll +
-		"\t" + t.engine.GetName() + "\n")
+		"\t" + tan.engine.GetName() + "\n")
 	fmt.Println(text)
 }

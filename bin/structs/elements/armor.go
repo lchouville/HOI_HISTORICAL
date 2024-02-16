@@ -4,6 +4,8 @@ import (
 	"math"
 )
 
+/** Armor Object ----------------------------- **/
+
 type Armor struct {
 	Front_thinckness int // front armor thickness
 	Front_angle      int // front armor angle
@@ -23,6 +25,11 @@ type Armor struct {
 	Bottom_thinckness int // bottom armor thickness
 	Bottom_angle      int // bottom armor angle
 }
+
+
+/** Builder --------------------------------- **/
+/** Accessors ------------------------------ **/
+/** Method -------------------------------- **/
 
 func ArmorCalculation(armor Armor) int {
 	var armor_value float64 //store the armor value calculated

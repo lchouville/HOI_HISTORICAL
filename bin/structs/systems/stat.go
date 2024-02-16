@@ -1,5 +1,7 @@
 package hoiMod
 
+/** Stats Object ----------------------------- **/
+
 type Stats struct {
 	/* Defensive Abilities */
 	defense      float32 // defense capacity
@@ -22,7 +24,29 @@ type Stats struct {
 	resources_cost []Resource // Resources needed for producing the equipment
 }
 
-/** Stats Constructor **/
+
+/** Builder --------------------------------- **/
+
+func DefaultStats(_value float32) *Stats {
+	stats := &Stats{
+		defense:         _value,
+		breakthrough:    _value,
+		hardness:        _value,
+		armor_value:     _value,
+		soft_attack:     _value,
+		hard_attack:     _value,
+		ap_attack:       _value,
+		air_attack:      _value,
+		maximum_speed:   _value,
+		reliability:     _value,
+		fuel_consuming:  _value,
+		build_cost_ic:   _value,
+		convert_cost_ic: _value,
+		lend_lease_cost: _value,
+		resources_cost:  DefaultRessources(_value),
+	}
+	return stats
+}
 func NewStats(
 	_defense float32,
 	_breakthrough float32,
@@ -60,7 +84,8 @@ func NewStats(
 	return stats
 }
 
-/** Accessor **/
+
+/** Accessors ------------------------------ **/
 /* Defensive Abilities */
 
 // SetDefense sets the defense stat
@@ -214,4 +239,53 @@ func (stats *Stats) SetResources(_resources []Resource) {
 // GetResources gets the resources cost
 func (stats *Stats) GetResources() []Resource {
 	return stats.resources_cost
+}
+
+/** Method -------------------------------- **/
+
+func (stats *Stats) AddStats(_stats Stats) {
+	/* Defensive Abilities */
+	stats.defense     += _stats.defense  
+	stats.breakthrough += _stats.breakthrough
+	stats.hardness  += _stats.hardness
+	stats.armor_value  += _stats.armor_value
+	/* Offensive Abilities */
+	stats.soft_attack += _stats.soft_attack
+	stats.hard_attack += _stats.hard_attack
+	stats.ap_attack += _stats.ap_attack
+	stats.air_attack += _stats.air_attack
+	/* Misc Abilities */
+	stats.maximum_speed += _stats.maximum_speed
+	stats.reliability += _stats.reliability
+	stats.fuel_consuming += _stats.fuel_consuming
+	stats.build_cost_ic += _stats.build_cost_ic
+	stats.convert_cost_ic += _stats.convert_cost_ic
+	stats.lend_lease_cost += _stats.lend_lease_cost
+	/* Material */
+	for i := 0; i < len(stats.resources_cost);i++{
+		stats.resources_cost[i].SetQuantity(stats.resources_cost[i].GetQuantity() + _stats.resources_cost[i].GetQuantity())
+	}
+}
+func (stats *Stats) MulStats(_stats Stats) {
+	/* Defensive Abilities */
+	stats.defense     *= _stats.defense  
+	stats.breakthrough *= _stats.breakthrough
+	stats.hardness  *= _stats.hardness
+	stats.armor_value  *= _stats.armor_value
+	/* Offensive Abilities */
+	stats.soft_attack *= _stats.soft_attack
+	stats.hard_attack *= _stats.hard_attack
+	stats.ap_attack *= _stats.ap_attack
+	stats.air_attack *= _stats.air_attack
+	/* Misc Abilities */
+	stats.maximum_speed *= _stats.maximum_speed
+	stats.reliability *= _stats.reliability
+	stats.fuel_consuming *= _stats.fuel_consuming
+	stats.build_cost_ic *= _stats.build_cost_ic
+	stats.convert_cost_ic *= _stats.convert_cost_ic
+	stats.lend_lease_cost *= _stats.lend_lease_cost
+	/* Material */
+	for i := 0; i < len(stats.resources_cost);i++{
+		stats.resources_cost[i].SetQuantity(stats.resources_cost[i].GetQuantity() * _stats.resources_cost[i].GetQuantity())
+	}
 }

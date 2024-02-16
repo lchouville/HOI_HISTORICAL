@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	s "hoiMod/bin/structs"
 	e "hoiMod/bin/structs/elements"
 )
@@ -30,8 +29,8 @@ func main() {
 	mausA.Bottom_thinckness = 105
 	mausA.Bottom_angle = 0
 
-	hull := e.NewHullF("maus", 9034, 3649, 2940, 128, mausA)
-	fmt.Println(mausA.Front_thinckness, " : ", hull.GetArmorMod())
+	// hull := e.NewHullF("maus", 9034, 3649, 2940, 128, mausA)
+	// fmt.Println(mausA.Front_thinckness, " : ", )
 
 	tank2 := s.NewTankE("Panther", "GERMAN")
 	tank2.Print()

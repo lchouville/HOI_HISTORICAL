@@ -3,17 +3,27 @@ package hoiMod
 /** Resource Object **/
 type Resource struct {
 	name     string // Name of the resource
-	quantity int    // Quantity of the resource
+	quantity float32    // Quantity of the resource
 }
 
 /** Builder **/
 
+// Create a new Resource slice with a default capacity
+func DefaultRessources(_value float32) []Resource {
+	var ressources []Resource
+	for _, r := range Resources {
+		ressources = append(ressources, *NewResource(r,_value))
+	}
+	return ressources
+}
 // NewResource creates a new Resource instance with provided parameters
-func NewResource(_name string, _quantity int) *Resource {
-	return &Resource{
+func NewResource(_name string, _quantity float32) *Resource {
+	var resource = &Resource{
 		name:     _name,
 		quantity: _quantity,
 	}
+	Resources = append(Resources, resource.name)
+	return resource
 }
 
 /** Accessor  **/
@@ -29,19 +39,13 @@ func (res *Resource) SetName(_name string) {
 }
 
 // GetQuantity gets the quantity of the resource
-func (res *Resource) GetQuantity() int {
+func (res *Resource) GetQuantity() float32 {
 	return res.quantity
 }
 
 // SetQuantity sets the quantity of the resource
-func (res *Resource) SetQuantity(_quantity int) {
+func (res *Resource) SetQuantity(_quantity float32) {
 	res.quantity = _quantity
 }
 
-// Actually in game
-const (
-	oil      = "Oil"
-	steel    = "Steel"
-	tungsten = "Tungsten"
-	chromium = "Chromium"
-)
+

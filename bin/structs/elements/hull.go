@@ -1,7 +1,11 @@
 package hoiMod
 
+import s "hoiMod/bin/structs/systems"
+
+/** Hull Object ------------------------------ **/
+
 type Hull struct {
-	// -- Real Data --
+	// Input Value
 	name string
 	// size
 	length int   // to mm
@@ -9,13 +13,14 @@ type Hull struct {
 	hight  int   // to mm
 	mass   int   // to kg
 	armor  Armor // to mm
-	// -- Game data --
-	speed_modifier float32 // modifier with the hull mass at 1mm of armor
-	armor_modifier int     // modifier with the hull
-	// resources []s.Resource // resources needed to build
+	// Output Value
+	addStats s.Stats //Stat Additioned at Equipement stats
+	mulStats s.Stats //Stat Multiplied at Equipement stats
 }
 
-/** Builder **/
+
+/** Builder --------------------------------- **/
+
 func NewHullE(name string) *Hull {
 	var this Hull
 	this.name = name
@@ -40,7 +45,9 @@ func NewHullF(
 	return &this
 }
 
-// Getter
+
+/** Accessors ------------------------------ **/
+
 func (h *Hull) GetName() string {
 	return h.name
 }
@@ -53,15 +60,17 @@ func (h *Hull) GetMass() int {
 func (h *Hull) GetArmor() Armor {
 	return h.armor
 }
-func (h *Hull) GetArmorMod() int {
-	return int(h.armor_modifier)
+// Get the adding effect with the material
+func (hul *Hull) GetAddStats() s.Stats { 
+	return hul.addStats 
+}
+// Get the multiplier effect with the material
+func (hul *Hull) GetMulStats() s.Stats { 
+	return hul.mulStats 
 }
 
-// Setter
-
-// Methode
+/** Method -------------------------------- **/
 
 func calculate(h *Hull) {
-	h.armor_modifier = ArmorCalculation(h.armor)
 
 }
